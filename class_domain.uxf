@@ -1,0 +1,48 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>690</x><y>70</y><w>120</w><h>80</h></coordinates><panel_attributes>/Pessoa/
+-
+/- nome: string/
+/- username: string/
+/- senha: string/</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>500</x><y>450</y><w>230</w><h>100</h></coordinates><panel_attributes>Festa
+-
+- nome:string
+- local: string
+- horario: string
+-
++ procurarUsuariosSimilares(usuario)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>510</x><y>220</y><w>190</w><h>60</h></coordinates><panel_attributes>Usuário
+-
++ participarFesta(festa)
++ responderPergunta(resposta)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>800</x><y>220</y><w>290</w><h>80</h></coordinates><panel_attributes>Adminstrador
+-
++ cadastrarFesta(nome,local,horario)
++ criarPergunta(enunciado, reposta1, reposta2)
++ removerPergunta(pergunta)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>740</x><y>140</y><w>150</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60;130;60;130;80</additional_attributes></element><element><id>Relation</id><coordinates><x>590</x><y>140</y><w>180</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>160;10;160;60;10;60;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>110</y><w>120</w><h>80</h></coordinates><panel_attributes>Pergunta
+-
+- enunciado: string
+- escolha1: string
+- escolha2: string</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>600</x><y>270</y><w>110</w><h>200</h></coordinates><panel_attributes>lt=-
+m1=0..*
+r1=- festas
+m2=0..*
+r2=- participantes
+participar</panel_attributes><additional_attributes>10;10;10;180</additional_attributes></element><element><id>Relation</id><coordinates><x>720</x><y>290</y><w>260</w><h>240</h></coordinates><panel_attributes>lt=-&gt;
+m1=1
+m2=0..n
+r2=- adminstrador
+criar</panel_attributes><additional_attributes>230;10;230;210;10;210</additional_attributes></element><element><id>Relation</id><coordinates><x>240</x><y>230</y><w>290</w><h>210</h></coordinates><panel_attributes>lt=-&gt;
+m1=1
+r1=- perguntas
+m2=5
+informar
+</panel_attributes><additional_attributes>270;20;120;20;120;180;10;180</additional_attributes></element><element><id>Relation</id><coordinates><x>130</x><y>20</y><w>840</w><h>220</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=0..*
+gerenciar</panel_attributes><additional_attributes>810;200;810;20;10;20;10;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>40</x><y>380</y><w>210</w><h>50</h></coordinates><panel_attributes>Resposta
+--
+- opçãoEscolhida: integer
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>130</x><y>180</y><w>90</w><h>220</h></coordinates><panel_attributes>lt=-&gt;
+m1=1
+m2=0..*
+r2= - pergunta
+possuir
+</panel_attributes><additional_attributes>10;10;10;200</additional_attributes></element></diagram>
