@@ -1,0 +1,9 @@
+{
+  "name": "amor-de-festa",
+  "version": "1.0.0",
+  "description": "Help people to find the similar person by similar interests in parties.",
+  "main": "src/index.js",
+  "repository": "https://github.com/gsbenevides2/amor-de-festa",
+  "author": "gsbenevides2",
+  "license": "MIT"
+}
