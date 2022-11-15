@@ -2,8 +2,17 @@
   "name": "amor-de-festa",
   "version": "1.0.0",
   "description": "Help people to find the similar person by similar interests in parties.",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/gsbenevides2/amor-de-festa",
   "author": "gsbenevides2",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.8.4"
+  }
 }
