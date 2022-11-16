@@ -98,4 +98,9 @@ export class Festa {
   public async incluirParticipante(usuario: string) {
     await FestaDAO.addUsuario(this.id, usuario);
   }
+
+  public static async listarFestas(): Promise<Festa[]> {
+    const festas = await FestaDAO.findAll();
+    return festas.map((festa) => new Festa(festa));
+  }
 }

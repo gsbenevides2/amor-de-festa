@@ -86,4 +86,28 @@ export const PerguntaDAO = {
       };
     }
   },
+
+  async findAll(): Promise<IPerguntaDAO[]> {
+    const connection = await Connection.getInstance();
+    const statement = await connection.prepare(`SELECT * FROM perguntas;`);
+    const results = await statement.all();
+    await statement.finalize();
+    return results.map((result) => {
+      if (result.tipo === "Disertativa") {
+        return {
+          id: result.id,
+          tipo: result.tipo,
+          enunciado: result.enunciado,
+        };
+      } else {
+        return {
+          id: result.id,
+          tipo: result.tipo,
+          enunciado: result.enunciado,
+          alternativa1: result.alternativa1,
+          alternativa2: result.alternativa2,
+        };
+      }
+    });
+  },
 };

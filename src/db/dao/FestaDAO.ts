@@ -71,4 +71,12 @@ export const FestaDAO = {
     await statement.run();
     await statement.finalize();
   },
+
+  async findAll(): Promise<IFestaDAO[]> {
+    const connection = await Connection.getInstance();
+    const statement = await connection.prepare(`SELECT * FROM festas`);
+    const result = await statement.all();
+    await statement.finalize();
+    return result;
+  },
 };

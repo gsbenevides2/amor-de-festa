@@ -30,4 +30,19 @@ export abstract class Pergunta<T> {
         result.alternativa2
       );
   }
+
+  public static async listar(): Promise<Pergunta<any>[]> {
+    const results = await PerguntaDAO.findAll();
+    return results.map((result) => {
+      if (result.tipo === "Disertativa")
+        return new PerguntaDisertativa(result.id, result.enunciado);
+      else
+        return new PerguntaObjetiva(
+          result.id,
+          result.enunciado,
+          result.alternativa1,
+          result.alternativa2
+        );
+    });
+  }
 }
