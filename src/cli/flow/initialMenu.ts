@@ -1,5 +1,8 @@
 import chalk from "chalk";
+import clear from "clear";
 import inquirer from "inquirer";
+import PressToContinuePrompt from "inquirer-press-to-continue";
+// import type { KeyDescriptor } from "inquirer-press-to-continue";
 
 import { Adminstrador } from "../../objects/Adminstrador";
 import { UsuarioAbstract } from "../../objects/UsuarioAbstract";
@@ -8,6 +11,8 @@ import { createFestaFlow } from "./createFesta";
 import { createPerguntaFlow } from "./createPergunta";
 import { listFestasFlow } from "./listFestas";
 import { listMyFestasFlow } from "./listMyFestas";
+
+inquirer.registerPrompt("press-to-continue", PressToContinuePrompt);
 
 export async function initMenuFlow(usuario: UsuarioAbstract) {
   await askPedenteQuestionsFlow(usuario);
@@ -34,6 +39,16 @@ export async function initMenuFlow(usuario: UsuarioAbstract) {
   else if (opção === "Criar pergunta") await createPerguntaFlow();
 
   if (opção !== "Sair") {
+    await inquirer.prompt({
+      // @ts-ignore: Type 'KeyDescriptor' is not assignable to type 'string'.
+      name: "press",
+      type: "press-to-continue",
+      anyKey: true,
+      pressToContinueMessage: "Pressione uma tecla para continuar",
+    });
+
+    clear();
+
     await initMenuFlow(usuario);
   } else {
     console.log(chalk.bold.blue("> Até mais!"));
