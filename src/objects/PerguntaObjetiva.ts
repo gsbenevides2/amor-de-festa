@@ -1,14 +1,20 @@
-import { PerguntaDAO } from "../db/dao/PerguntaDAO";
-import { Pergunta } from "./Pergunta";
+import { PerguntaAbstract } from "./PerguntaAbstract";
 import { RespostaObjetiva } from "./RespostaObjetiva";
-import { Usuario } from "./Usuario";
 
-export class PerguntaObjetiva extends Pergunta<1 | 2> {
+export class PerguntaObjetiva extends PerguntaAbstract<1 | 2> {
   protected id: string;
   protected tipo: "Disertativa" | "Objetiva" = "Objetiva";
   protected enunciado: string;
   protected alternativa1: string;
   protected alternativa2: string;
+
+  public getAlternativa1(): string {
+    return this.alternativa1;
+  }
+
+  public getAlternativa2(): string {
+    return this.alternativa2;
+  }
 
   public constructor(
     id: string,
@@ -24,29 +30,11 @@ export class PerguntaObjetiva extends Pergunta<1 | 2> {
   }
 
   public async responderPergunta(
-    usuario: Usuario,
+    username: string,
     alternativaEscolhida: 1 | 2
   ): Promise<RespostaObjetiva> {
-    const r = new RespostaObjetiva(
-      this.id,
-      usuario.getUsername(),
-      alternativaEscolhida
-    );
+    const r = new RespostaObjetiva(this.id, username, alternativaEscolhida);
     await r.salvar();
     return r;
-  }
-
-  public static async criarPergunta(
-    enunciado: string,
-    alternativa1: string,
-    alternativa2: string
-  ) {
-    const id = await PerguntaDAO.create({
-      tipo: "Objetiva",
-      enunciado,
-      alternativa1,
-      alternativa2,
-    });
-    return new PerguntaObjetiva(id, enunciado, alternativa1, alternativa2);
   }
 }

@@ -19,7 +19,7 @@ export const FestaDAO = {
                 local TEXT NOT NULL,
                 horario TEXT NOT NULL,
                 adminstrador TEXT NOT NULL,
-                FOREIGN KEY (adminstrador) REFERENCES adminstradores(username)
+                FOREIGN KEY (adminstrador) REFERENCES usuarios(username)
             );`);
     await statement.run();
     await statement.finalize();

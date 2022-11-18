@@ -1,9 +1,7 @@
-import { PerguntaDAO } from "../db/dao/PerguntaDAO";
-import { Pergunta } from "./Pergunta";
+import { PerguntaAbstract } from "./PerguntaAbstract";
 import { RespostaDisertativa } from "./RespostaDisertativa";
-import { Usuario } from "./Usuario";
 
-export class PerguntaDisertativa extends Pergunta<string> {
+export class PerguntaDisertativa extends PerguntaAbstract<string> {
   protected id: string;
   protected tipo: "Disertativa" | "Objetiva" = "Disertativa";
   protected enunciado: string;
@@ -15,16 +13,11 @@ export class PerguntaDisertativa extends Pergunta<string> {
   }
 
   public async responderPergunta(
-    usuario: Usuario,
+    username: string,
     conteudo: string
   ): Promise<RespostaDisertativa> {
-    const r = new RespostaDisertativa(this.id, usuario.getUsername(), conteudo);
+    const r = new RespostaDisertativa(this.id, username, conteudo);
     await r.salvar();
     return r;
-  }
-
-  public static async criarPergunta(enunciado: string) {
-    const id = await PerguntaDAO.create({ tipo: "Disertativa", enunciado });
-    return new PerguntaDisertativa(id, enunciado);
   }
 }

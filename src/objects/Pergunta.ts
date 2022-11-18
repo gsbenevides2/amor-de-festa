@@ -1,24 +1,22 @@
 import { PerguntaDAO } from "../db/dao/PerguntaDAO";
+import type { PerguntaAbstract } from "./PerguntaAbstract";
 import { PerguntaDisertativa } from "./PerguntaDisertativa";
 import { PerguntaObjetiva } from "./PerguntaObjetiva";
-import { Resposta } from "./Resposta";
-import { Usuario } from "./Usuario";
 
-export abstract class Pergunta<T> {
-  protected abstract id: string;
-  protected abstract tipo: "Disertativa" | "Objetiva";
-  protected abstract enunciado: string;
+interface IPerguntaObjetiva {
+  tipo: "Objetiva";
+  enunciado: string;
+  alternativa1: string;
+  alternativa2: string;
+}
 
-  public getId(): string {
-    return this.id;
-  }
+interface IPerguntaDisertativa {
+  tipo: "Disertativa";
+  enunciado: string;
+}
 
-  public abstract responderPergunta(
-    usuario: Usuario,
-    resposta: T
-  ): Promise<Resposta>;
-
-  public static async procurar(id: string): Promise<Pergunta<any>> {
+export class Pergunta {
+  public static async procurar(id: string): Promise<PerguntaAbstract<any>> {
     const result = await PerguntaDAO.find(id);
     if (result.tipo === "Disertativa")
       return new PerguntaDisertativa(result.id, result.enunciado);
@@ -31,7 +29,7 @@ export abstract class Pergunta<T> {
       );
   }
 
-  public static async listar(): Promise<Pergunta<any>[]> {
+  public static async listar(): Promise<PerguntaAbstract<any>[]> {
     const results = await PerguntaDAO.findAll();
     return results.map((result) => {
       if (result.tipo === "Disertativa")
@@ -44,5 +42,21 @@ export abstract class Pergunta<T> {
           result.alternativa2
         );
     });
+  }
+
+  public static async criarPergunta(
+    pergunta: IPerguntaObjetiva | IPerguntaDisertativa
+  ) {
+    const id = await PerguntaDAO.create(pergunta);
+    if (pergunta.tipo === "Objetiva")
+      return new PerguntaObjetiva(
+        id,
+        pergunta.enunciado,
+        pergunta.alternativa1,
+        pergunta.alternativa2
+      );
+    else {
+      return new PerguntaDisertativa(id, pergunta.enunciado);
+    }
   }
 }

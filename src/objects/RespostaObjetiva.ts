@@ -1,4 +1,6 @@
+import { PerguntaDAO } from "../db/dao/PerguntaDAO";
 import { RespostaDAO } from "../db/dao/RespostaDAO";
+import { PerguntaObjetiva } from "./PerguntaObjetiva";
 import { Resposta } from "./Resposta";
 
 export class RespostaObjetiva extends Resposta {
@@ -27,5 +29,18 @@ export class RespostaObjetiva extends Resposta {
 
   public mesmaResposta(resposta: RespostaObjetiva): boolean {
     return resposta.alternativaEscolhida === this.alternativaEscolhida;
+  }
+
+  public async getPergunta(): Promise<PerguntaObjetiva> {
+    const result = await PerguntaDAO.find(this.pergunta);
+    if (result.tipo === "Disertativa")
+      throw new Error("Tipo de pergunta incorreto");
+    else
+      return new PerguntaObjetiva(
+        result.id,
+        result.enunciado,
+        result.alternativa1,
+        result.alternativa2
+      );
   }
 }

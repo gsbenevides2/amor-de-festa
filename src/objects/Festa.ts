@@ -3,6 +3,8 @@ import { UsuarioDAO } from "../db/dao/UsuarioDAO";
 import { Adminstrador } from "./Adminstrador";
 import { Resposta } from "./Resposta";
 import { Usuario } from "./Usuario";
+import { UsuarioAbstract } from "./UsuarioAbstract";
+// import { UsuarioComum } from "./UsuarioComum";
 
 interface IFesta {
   id: string;
@@ -13,7 +15,7 @@ interface IFesta {
 }
 
 type UsuariosSimilar = Array<{
-  usuario: Usuario;
+  usuario: UsuarioAbstract;
   pontuacao: number;
 }>;
 
@@ -37,6 +39,10 @@ export class Festa {
     return new Festa({ ...args, id });
   }
 
+  public getId() {
+    return this.id;
+  }
+
   public getNome() {
     return this.nome;
   }
@@ -50,32 +56,34 @@ export class Festa {
   }
 
   public async getAdminstrador() {
-    return await Adminstrador.procurar(this.adminstrador);
+    return (await Usuario.procurar(this.adminstrador)) as Adminstrador;
   }
 
-  public async getParticipantes(): Promise<Usuario[]> {
+  public async getParticipantes(): Promise<UsuarioAbstract[]> {
     const participantes = await UsuarioDAO.findByFesta(this.id);
-    return participantes.map((participante) => new Usuario(participante));
+    return participantes.map((participante) => Usuario.parseDb(participante));
   }
 
   public async procurarUsuariosSimilares(
-    usuarioA: Usuario
+    usuarioA: UsuarioAbstract
   ): Promise<UsuariosSimilar> {
     async function pontuarRespostasUsuario(
       respostasCorretas: Resposta[],
-      usuarioB: Usuario
+      usuarioB: UsuarioAbstract
     ): Promise<number> {
       const respostasUsuario = await usuarioB.getRespostas();
       let pontuacao = 0;
       for (let i = 0; i < respostasCorretas.length; i++) {
         const respostaCorreta = respostasCorretas[i];
         const respostaInformada = respostasUsuario.find((resposta) =>
-          resposta.mesmaResposta(respostaCorreta)
+          resposta.respostasDeMesmaPergunta(respostaCorreta)
         );
 
         if (respostaInformada) {
           if (respostaInformada.mesmaResposta(respostaCorreta)) {
-            pontuacao++;
+            pontuacao += 2;
+          } else {
+            pontuacao -= 1;
           }
         }
       }
@@ -83,16 +91,20 @@ export class Festa {
     }
 
     const usuarios = await this.getParticipantes();
-    const usuariosSimilar = usuarios.map(async (u) => {
-      return {
-        usuario: u,
-        pontuacao: await pontuarRespostasUsuario(
-          await usuarioA.getRespostas(),
-          u
-        ),
-      };
-    });
-    return await Promise.all(usuariosSimilar);
+    const usuariosSimilar = usuarios
+      .filter((u) => u.getUsername() !== usuarioA.getUsername())
+      .map(async (u) => {
+        return {
+          usuario: u,
+          pontuacao: await pontuarRespostasUsuario(
+            await usuarioA.getRespostas(),
+            u
+          ),
+        };
+      });
+    return (await Promise.all(usuariosSimilar)).sort(
+      (a, b) => b.pontuacao - a.pontuacao
+    );
   }
 
   public async incluirParticipante(usuario: string) {

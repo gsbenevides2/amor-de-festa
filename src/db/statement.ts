@@ -20,7 +20,7 @@ export class Statement {
   public async run(): Promise<void> {
     return await new Promise((resolve, reject) => {
       this.statement.run(function (err: Error | null, ...args) {
-        console.log(args);
+  
         if (err != null) {
           reject(err);
         } else {
@@ -33,7 +33,6 @@ export class Statement {
   public async all(): Promise<any[]> {
     return await new Promise((resolve, reject) => {
       this.statement.all((err: Error | null, rows: any[], ...args: any[]) => {
-        console.log(args);
         if (err != null) {
           reject(err);
         } else {
@@ -46,7 +45,6 @@ export class Statement {
   public async get(): Promise<any> {
     return await new Promise((resolve, reject) => {
       this.statement.get((err: Error | null, row: any, ...args) => {
-        console.log(args);
         if (err != null) {
           reject(err);
         } else {

@@ -1,9 +1,13 @@
-<diagram program="umletino" version="15.0.0"><zoom_level>16</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>1520</x><y>0</y><w>192</w><h>128</h></coordinates><panel_attributes>/Pessoa/
+<diagram program="umletino" version="15.0.0"><zoom_level>6</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>774</x><y>174</y><w>132</w><h>84</h></coordinates><panel_attributes>/Usuario/
 -
 /- nome: string/
 /- username: string/
 /- senha: string/
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1280</x><y>672</y><w>368</w><h>240</h></coordinates><panel_attributes>Festa
+/- tipo: string/
+-
+_+ logar(username, senha)_
+_+ procurar(username)_
++ obterPerguntasNaoRespondidas()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>696</x><y>456</y><w>138</w><h>90</h></coordinates><panel_attributes>Festa
 -
 - id: string
 - nome:string
@@ -13,64 +17,59 @@
 _+ criar(nome, local, horario)_
 _+ listar()_
 + procurarUsuariosSimilares(usuario)
-+ incluirParticipante(usuario)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1280</x><y>240</y><w>336</w><h>128</h></coordinates><panel_attributes>Usuário
++ incluirParticipante(usuario)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>834</x><y>306</y><w>132</w><h>30</h></coordinates><panel_attributes>Comum
 -
 _+ cadastrar(nome, username, senha)_
-_+ logar(username, senha)_
-_+ procurar(username)_
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1632</x><y>240</y><w>352</w><h>128</h></coordinates><panel_attributes>Adminstrador
--
-_+ cadastrar(nome, username, senha)_
-_+ logar(username, senha)_
-_+ procurar(username)_
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1600</x><y>112</y><w>240</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50;130;50;130;80</additional_attributes></element><element><id>Relation</id><coordinates><x>1440</x><y>112</y><w>208</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>110;10;110;50;10;50;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>1440</x><y>352</y><w>176</w><h>352</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>756</x><y>342</y><w>66</w><h>18</h></coordinates><panel_attributes>Adminstrador
+
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>786</x><y>252</y><w>60</w><h>102</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>80;10;80;40;10;40;10;150</additional_attributes></element><element><id>Relation</id><coordinates><x>828</x><y>252</y><w>90</w><h>66</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;40;130;40;130;90</additional_attributes></element><element><id>Relation</id><coordinates><x>708</x><y>234</y><w>78</w><h>234</h></coordinates><panel_attributes>lt=-
 m1=0..*
 r1=- festas
 m2=0..*
 r2=- participantes
-participar</panel_attributes><additional_attributes>10;10;10;200</additional_attributes></element><element><id>Relation</id><coordinates><x>1632</x><y>352</y><w>256</w><h>512</h></coordinates><panel_attributes>lt=-&gt;
+participar</panel_attributes><additional_attributes>110;20;10;20;10;370</additional_attributes></element><element><id>Relation</id><coordinates><x>786</x><y>354</y><w>66</w><h>114</h></coordinates><panel_attributes>lt=-&gt;
 m1=1
 m2=0..n
 r2=- adminstrador
-criar</panel_attributes><additional_attributes>120;10;120;290;10;290</additional_attributes></element><element><id>UMLClass</id><coordinates><x>800</x><y>464</y><w>320</w><h>80</h></coordinates><panel_attributes>RespostaObjetiva
+criar</panel_attributes><additional_attributes>10;10;10;170</additional_attributes></element><element><id>UMLClass</id><coordinates><x>516</x><y>378</y><w>120</w><h>30</h></coordinates><panel_attributes>RespostaObjetiva
 --
 - alternativaEscolhida:  integer
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>464</y><w>192</w><h>80</h></coordinates><panel_attributes>PerguntaDisertativa
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>168</x><y>378</y><w>72</w><h>18</h></coordinates><panel_attributes>PerguntaDisertativa
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>204</x><y>264</y><w>84</w><h>84</h></coordinates><panel_attributes>/Pergunta/
 -
-_+ criarPergunta()_
-_</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>96</x><y>192</y><w>224</w><h>192</h></coordinates><panel_attributes>/Pergunta/
--
-/ - id /
-/ - tipo/
-/- enunciado/
+/ - id: string /
+/ - tipo: string/
+/- enunciado: string/
 -
 /+ responderPergunta()/
 _+ procurar(id)_
 _+ listar()_
+_+ criarPergunta()_
 
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>560</x><y>464</y><w>224</w><h>80</h></coordinates><panel_attributes>RespostaDisertativa
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>426</x><y>378</y><w>84</w><h>30</h></coordinates><panel_attributes>RespostaDisertativa
 -
-- conteudo
+- conteudo: string
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>656</x><y>240</y><w>288</w><h>128</h></coordinates><panel_attributes>/Resposta/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>450</x><y>288</y><w>144</w><h>54</h></coordinates><panel_attributes>/Resposta/
 -
 /+ salvar() /
-+ mesmaPergunta(resposta)
++ respostasDeMesmaPergunta(resposta)
++ respostaDessaPergunta(pergunta)
 /+ mesmaResposta(resposta)/
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>656</x><y>352</y><w>176</w><h>144</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;90;40;10;40;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>224</x><y>464</y><w>224</w><h>128</h></coordinates><panel_attributes>PerguntaObjetiva
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>462</x><y>336</y><w>66</w><h>54</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;90;40;10;40;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>252</x><y>378</y><w>84</w><h>36</h></coordinates><panel_attributes>PerguntaObjetiva
 -
 - alternativa1: string
-- alternativa2: string
--
-_+ criarPergunta()_</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>304</x><y>272</y><w>384</w><h>80</h></coordinates><panel_attributes>lt=-&gt;
+- alternativa2: string</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>282</x><y>306</y><w>180</w><h>30</h></coordinates><panel_attributes>lt=-&gt;
 m1=1
 m2=0..*
 r2= - pergunta
 possuir
-</panel_attributes><additional_attributes>10;20;220;20</additional_attributes></element><element><id>Relation</id><coordinates><x>928</x><y>272</y><w>384</w><h>80</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>Relation</id><coordinates><x>588</x><y>192</y><w>198</w><h>144</h></coordinates><panel_attributes>lt=-
 m1=0..*
 r1=- usuario
 m2=1
 r2=- respostas
-possuir</panel_attributes><additional_attributes>10;20;220;20</additional_attributes></element><element><id>Relation</id><coordinates><x>784</x><y>352</y><w>208</w><h>144</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;40;110;40;110;70</additional_attributes></element><element><id>Relation</id><coordinates><x>192</x><y>368</y><w>160</w><h>128</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50;80;50;80;60</additional_attributes></element><element><id>Relation</id><coordinates><x>80</x><y>368</y><w>160</w><h>128</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>80;10;80;50;10;50;10;60</additional_attributes></element></diagram>
+possuir</panel_attributes><additional_attributes>10;210;90;210;90;20;310;20</additional_attributes></element><element><id>Relation</id><coordinates><x>510</x><y>336</y><w>78</w><h>54</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;40;110;40;110;70</additional_attributes></element><element><id>Relation</id><coordinates><x>240</x><y>342</y><w>60</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50;80;50;80;60</additional_attributes></element><element><id>Relation</id><coordinates><x>198</x><y>342</y><w>60</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>80;10;80;50;10;50;10;60</additional_attributes></element></diagram>
